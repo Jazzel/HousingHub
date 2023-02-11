@@ -36,7 +36,7 @@ export const loadUser = () => async (dispatch) => {
 
 // Register User
 export const register =
-  ({ name, email, password, role, businessname, address, phone }) =>
+  ({ name, email, password, nic }) =>
   async (dispatch) => {
     const config = {
       headers: {
@@ -48,10 +48,7 @@ export const register =
       name,
       email,
       password,
-      role,
-      businessname,
-      address,
-      phone,
+      nic,
     });
 
     try {

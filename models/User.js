@@ -29,13 +29,7 @@ const UserSchema = new Schema(
     confirmationCode: {
       type: String,
     },
-    businessname: {
-      type: String,
-    },
-    address: {
-      type: String,
-    },
-    phone: {
+    nic: {
       type: String,
     },
   },

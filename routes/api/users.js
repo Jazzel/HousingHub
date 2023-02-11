@@ -31,7 +31,7 @@ router.post(
   "/",
   [
     check("name", "Name is required").not().isEmpty(),
-    check("role", "Role is required").not().isEmpty(),
+    check("nic", "Nic is required").not().isEmpty(),
     check("email", "Please include a valid email").isEmail(),
     check(
       "password",
@@ -44,8 +44,7 @@ router.post(
     if (!errors.isEmpty())
       return res.status(400).json({ errors: errors.array() });
 
-    const { name, email, password, role, businessname, address, phone } =
-      req.body;
+    const { name, email, password, nic } = req.body;
 
     try {
       // See if user exists
@@ -59,11 +58,8 @@ router.post(
       user = new User({
         name,
         email,
-        role,
         password,
-        businessname,
-        address,
-        phone,
+        nic,
       });
 
       // Encrypt password
