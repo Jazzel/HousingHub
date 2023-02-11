@@ -161,3 +161,16 @@ router.get("/:id", auth, async (req, res) => {
 });
 
 module.exports = router;
+
+// Path: routes\api\users\:society
+// Compare this snippet from routes\api\societies.js:
+// const Society = require("../../models/Society");
+router.get("/:society", auth, async (req, res) => {
+  try {
+    const users = await Users.find({ society: req.params.society });
+    res.send(users);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});

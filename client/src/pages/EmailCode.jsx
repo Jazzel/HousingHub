@@ -23,7 +23,13 @@ const EmailCode = ({ setAlert, verifyCode }) => {
 
   return (
     <div className="row">
-      <div className="col-12 col-md-6 shadow-lg"></div>
+      <div
+        className="col-12 col-md-6 shadow-lg"
+        style={{
+          backgroundImage: `url(${require("../assets/imgs/wiktor-karkocha-WA2uSCbTXkI-unsplash.jpg")})`,
+          backgroundSize: "cover",
+        }}
+      ></div>
       <div
         className="col-12 col-md-6"
         style={{

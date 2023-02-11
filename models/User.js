@@ -21,6 +21,10 @@ const UserSchema = new Schema(
       required: true,
       default: "admin",
     },
+    society: {
+      type: String,
+      required: true,
+    },
     status: {
       type: String,
       enum: ["Pending", "Active", "Blocked"],

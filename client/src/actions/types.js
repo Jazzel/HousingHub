@@ -41,3 +41,8 @@ export const CLEAR_CART = "CLEAR_CART";
 export const CART_ERROR = "CART_ERROR";
 export const REMOVE_ONE_FROM_CART = "REMOVE_ONE_FROM_CART";
 export const ADD_ONE_TO_CART = "ADD_ONE_TO_CART";
+
+export const GET_SOCIETIES = "GET_SOCIETIES";
+export const SOCIETY_ERROR = "SOCIETY_ERROR";
+
+export const CREATE_SOS = "CREATE_SOS";

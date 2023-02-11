@@ -7,7 +7,7 @@ import {
   useLocation,
   Navigate,
 } from "react-router-dom";
-import { useEffect, useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Login from "./pages/Login";
@@ -20,6 +20,15 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ConfirmAccount from "./pages/ConfirmAccount";
 import EmailCode from "./pages/EmailCode";
 import EmailSent from "./pages/EmailSent";
+import EditProfile from "./pages/profileForms/EditProfile";
+import AddExperience from "./pages/profileForms/AddExperience";
+import AddEducation from "./pages/profileForms/AddEducation";
+import AddHobby from "./pages/profileForms/AddHobby";
+import CreateUserProfile from "./pages/CreateUserProfile";
+import Profile from "./pages/profileForms/Profile";
+
+import { createSignal } from "react-signal";
+import SOS from "./pages/SOS";
 
 export const HOST = "http://localhost:5000";
 
@@ -34,40 +43,103 @@ const Wrapper = ({ children }) => {
   return children;
 };
 
+export const Signal = createSignal();
+
 const App = () => {
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);
   return (
-    <Provider store={store}>
-      <Router>
-        <Wrapper>
-          <Routes>
-            <Route path="/*">
-              <Route index element={<Home />} />
-              <Route
-                path="dashboard"
-                index
-                element={
-                  <PrivateRoute>
-                    <Dashboard />
-                  </PrivateRoute>
-                }
-              />
+    <Signal.Provider>
+      <Provider store={store}>
+        <Router>
+          <Wrapper>
+            <Routes>
+              <Route path="/*">
+                <Route index element={<Home />} />
+                <Route
+                  path="dashboard"
+                  index
+                  element={
+                    <PrivateRoute>
+                      <Dashboard />
+                    </PrivateRoute>
+                  }
+                />
 
-              <Route path="login" element={<Login />} />
-              <Route path="register" element={<Register />} />
-              <Route path="forgot-password" element={<ForgotPassword />} />
-              <Route path="confirm/:email/:code" element={<ConfirmAccount />} />
-              <Route path="reset/:email/:code" element={<EmailCode />} />
-              <Route path="email-sent/:email" element={<EmailSent />} />
-              <Route path="about" element={<About />} />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Route>
-          </Routes>
-        </Wrapper>
-      </Router>
-    </Provider>
+                <Route path="login" element={<Login />} />
+                <Route path="register" element={<Register />} />
+                <Route path="forgot-password" element={<ForgotPassword />} />
+                <Route
+                  path="confirm/:email/:code"
+                  element={<ConfirmAccount />}
+                />
+                <Route path="reset/:email/:code" element={<EmailCode />} />
+                <Route path="email-sent/:email" element={<EmailSent />} />
+
+                <Route path="dashboard" element={<Dashboard />} />
+
+                <Route
+                  exact
+                  path="create-profile"
+                  element={
+                    <PrivateRoute>
+                      <CreateUserProfile />
+                    </PrivateRoute>
+                  }
+                />
+
+                <Route
+                  path="edit-profile"
+                  element={
+                    <PrivateRoute>
+                      <EditProfile />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="add-experience"
+                  element={
+                    <PrivateRoute>
+                      <AddExperience />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="add-education"
+                  element={
+                    <PrivateRoute>
+                      <AddEducation />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="add-hobby"
+                  element={
+                    <PrivateRoute>
+                      <AddHobby />
+                    </PrivateRoute>
+                  }
+                />
+
+                <Route
+                  exact
+                  path="profile/:id"
+                  element={
+                    <PrivateRoute>
+                      <Profile />
+                    </PrivateRoute>
+                  }
+                />
+
+                <Route path="about" element={<About />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Route>
+            </Routes>
+          </Wrapper>
+        </Router>
+      </Provider>
+    </Signal.Provider>
   );
 };
 

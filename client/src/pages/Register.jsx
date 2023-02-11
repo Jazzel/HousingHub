@@ -1,18 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
 import { Link, useNavigate } from "react-router-dom";
 import { setAlert } from "../actions/alert";
 import { register } from "../actions/auth";
 
-const Register = ({ register }) => {
+import { getSocieties } from "./../actions/society";
+
+const Register = ({ register, getSocieties, society: { societies } }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     password2: "",
     nic: "",
     name: "",
+    society: "",
   });
+
+  useEffect(() => {
+    getSocieties();
+  }, [getSocieties]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -35,7 +42,13 @@ const Register = ({ register }) => {
 
   return (
     <div className="row">
-      <div className="col-12 col-md-6 shadow-lg"></div>
+      <div
+        className="col-12 col-md-6 shadow-lg"
+        style={{
+          backgroundImage: `url(${require("../assets/imgs/breno-assis-r3WAWU5Fi5Q-unsplash.jpg")})`,
+          backgroundSize: "cover",
+        }}
+      ></div>
       <div
         className="col-12 col-md-6 "
         style={{
@@ -77,6 +90,19 @@ const Register = ({ register }) => {
             onChange={handleChange}
           />
 
+          <select
+            value={formData.society}
+            className="form-control w-50 m-auto mb-2"
+            onChange={handleChange}
+            name="society"
+          >
+            {societies &&
+              societies.length > 0 &&
+              societies.map(({ society }) => (
+                <option value={society}>{society}</option>
+              ))}
+          </select>
+
           <input
             type="password"
             className="form-control  w-50 m-auto  mb-2"
@@ -112,6 +138,8 @@ const Register = ({ register }) => {
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  society: state.society,
+});
 
-export default connect(mapStateToProps, { register })(Register);
+export default connect(mapStateToProps, { register, getSocieties })(Register);
