@@ -29,6 +29,7 @@ import Profile from "./pages/profileForms/Profile";
 
 import { createSignal } from "react-signal";
 import SOS from "./pages/SOS";
+import Profiles from "./pages/Profiles";
 
 export const HOST = "http://localhost:5000";
 
@@ -70,6 +71,8 @@ const App = () => {
                 <Route path="login" element={<Login />} />
                 <Route path="register" element={<Register />} />
                 <Route path="forgot-password" element={<ForgotPassword />} />
+                <Route exact path="profiles" element={<Profiles />} />
+                <Route exact path="profile/:id" element={<Profiles />} />
                 <Route
                   path="confirm/:email/:code"
                   element={<ConfirmAccount />}

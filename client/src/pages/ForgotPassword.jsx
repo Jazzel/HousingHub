@@ -38,7 +38,7 @@ const ForgotPassword = ({ setAlert, sendEmailForVerification }) => {
       <div
         className="col-12 col-md-6 shadow-lg"
         style={{
-          backgroundImage: `url(${require("../assets/imgs/adrien-olichon-asxhiRrZwGs-unsplash.jpg")})`,
+          backgroundImage: `url(${require("../assets/imgs/housinghub.jpg")})`,
           backgroundSize: "cover",
         }}
       ></div>
